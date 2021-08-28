@@ -30,6 +30,12 @@
                     </li>
 
                     <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{{ route('employees.index') }}">
+                            Funcionários
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="{{ route('projects.index') }}">
                             Projetos
                         </a>
