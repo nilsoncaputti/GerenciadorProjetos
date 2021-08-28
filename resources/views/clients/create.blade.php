@@ -15,7 +15,7 @@
             Nome
         </label>
 
-        <input type="text" class="form-control" id="nome" name="nome" placeholder="Digite o nome" required>
+        <input value="{{ old('nome') }}" type="text" class="form-control" id="nome" name="nome" placeholder="Digite o nome">
     </div>
 
     <div class="mb-3">
@@ -23,7 +23,7 @@
             Endereço
         </label>
 
-        <input type="text" class="form-control" id="endereco" name="endereco" placeholder="Digite o endereço" required>
+        <input value="{{ old('endereco') }}" type="text" class="form-control" id="endereco" name="endereco" placeholder="Digite o endereço">
     </div>
 
     <div class="mb-3">
@@ -31,7 +31,7 @@
             Observação
         </label>
 
-        <textarea class="form-control" id="observacao" name="observacao" rows="3" placeholder="Digite a Observação" required></textarea>
+        <textarea class="form-control" id="observacao" name="observacao" rows="3" placeholder="Digite a Observação">{{ old('observacao') }}</textarea>
     </div>
 
     <button class="btn btn-success" type="submit">

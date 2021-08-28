@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Client;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
+use App\Http\Requests\ClientRequest;
+use Illuminate\Http\RedirectResponse;
 
 class ClientController extends Controller
 {
@@ -36,13 +36,14 @@ class ClientController extends Controller
     }
 
     // Cria um cliente no banco de dados
-    public function store(Request $request): RedirectResponse
+    public function store(ClientRequest $request): RedirectResponse
     {
         $dados = $request->except('_token');
 
         Client::create($dados);
 
-        return redirect('/clients');
+        return redirect()->route('clients.index')
+            ->with('mensagem', "Cadastrado com sucesso!");
     }
 
     // Mostra o formulário para edição
@@ -56,7 +57,7 @@ class ClientController extends Controller
     }
 
     // Atualiza o cliente no banco de dados
-    public function update(int $id, Request $request): RedirectResponse
+    public function update(int $id, ClientRequest $request): RedirectResponse
     {
         $client = Client::findOrFail($id);
 
@@ -66,7 +67,8 @@ class ClientController extends Controller
             'observacao' => $request->observacao
         ]);
 
-        return redirect('/clients');
+        return redirect()->route('clients.index')
+            ->with('mensagem', "Atualizado com sucesso!");
     }
     // Apaga um cliente no banco de dados
     public function destroy(int $id): RedirectResponse

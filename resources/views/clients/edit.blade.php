@@ -16,7 +16,7 @@
             Nome
         </label>
 
-        <input type="text" value="{{ $client->nome }}" class="form-control" id="nome" name="nome" placeholder="Digite o nome" required>
+        <input type="text" value="{{ old('nome', $client->nome) }}" class="form-control" id="nome" name="nome" placeholder="Digite o nome" required>
     </div>
 
     <div class="mb-3">
@@ -24,7 +24,7 @@
             Endereço
         </label>
 
-        <input type="text" value="{{ $client->endereco }}" class="form-control" id="endereco" name="endereco" placeholder="Digite o endereço" required>
+        <input type="text" value="{{ old('endereco', $client->endereco)  }}" class="form-control" id="endereco" name="endereco" placeholder="Digite o endereço" required>
     </div>
 
     <div class="mb-3">
@@ -32,7 +32,7 @@
             Observação
         </label>
 
-        <textarea class="form-control" id="observacao" name="observacao" rows="3" placeholder="Digite a Observação" required>{{ $client->observacao }}</textarea>
+        <textarea class="form-control" id="observacao" name="observacao" rows="3" placeholder="Digite a Observação" required>{{ old('observacao', $client->observacao) }}</textarea>
     </div>
 
     <button class="btn btn-success" type="submit">
