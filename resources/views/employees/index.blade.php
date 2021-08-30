@@ -29,11 +29,11 @@
             </td>
 
             <td>
-                {{ $employee->data_contratacao }}
+                {{ date_to_br($employee->data_contratacao) }}
             </td>
 
             <td>
-                {{ $employee->data_demissao === null ? 'Ativo' : 'Demitido' }}
+                {{ situacao_funcionario($employee->data_demissao) }}
             </td>
 
             <td>

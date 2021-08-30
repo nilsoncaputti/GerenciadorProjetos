@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
 
 class EmployeeRequest extends FormRequest
@@ -25,5 +26,18 @@ class EmployeeRequest extends FormRequest
             'cep' => ['required', 'size:8', 'string'],
             'estado' => ['required', 'size:2', 'string']
         ];
+    }
+
+    public function validationData()
+    {
+        $dados = $this->all();
+
+        $dados['cpf'] = limpa_mascara($dados['cpf']);
+        $dados['cep'] = limpa_mascara($dados['cep']);
+        $dados['data_contratacao'] = date_to_iso($dados['data_contratacao']);
+
+        $this->replace($dados);
+
+        return $dados;
     }
 }
