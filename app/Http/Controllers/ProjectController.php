@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Client;
 use App\Models\Project;
+use App\Models\Employee;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
@@ -18,12 +20,18 @@ class ProjectController extends Controller
 
     public function create()
     {
-        //
+        $clientes = Client::get();
+        $funcionarios = Employee::get();
+
+        return view('projects.create', [
+            'clientes' => $clientes,
+            'funcionarios' => $funcionarios
+        ]);
     }
 
     public function store(Request $request)
     {
-        //
+        //dd($request->all());
     }
 
     public function show(Project $project)

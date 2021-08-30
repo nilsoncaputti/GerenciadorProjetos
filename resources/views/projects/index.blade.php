@@ -31,7 +31,7 @@
     </tbody>
 </table>
 
-<a class="btn btn-success" href="#">
+<a class="btn btn-success" href="{{ route('projects.create') }}">
     Novo Projeto
 </a>
 @endsection
