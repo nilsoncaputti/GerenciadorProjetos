@@ -10,7 +10,7 @@
             <th scope="col">ID</th>
             <th scope="col">Nome</th>
             <th scope="col">Cliente</th>
-            {{-- <th scope="col">Ações</th> --}}
+            <th scope="col">Ações</th> 
         </tr>
     </thead>
 
@@ -26,6 +26,12 @@
             </td>
 
             <td>{{ $project->client->nome }}</td>
+            
+            <td>
+                <a class="btn btn-primary" href="{{ route('projects.edit', $project) }}">
+                    Atualizar
+                    </a>
+            </td>
         </tr>
         @endforeach
     </tbody>

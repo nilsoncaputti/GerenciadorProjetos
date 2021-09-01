@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Client;
 use App\Models\Project;
 use App\Models\Employee;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Requests\ProjectRequest;
 
 class ProjectController extends Controller
 {
@@ -29,9 +30,18 @@ class ProjectController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(ProjectRequest $request)
     {
-        //dd($request->all());
+        DB::transaction(function () use ($request) {
+            $project = project::create(
+                $request->except(['_token', 'funcionarios'])
+            );
+
+            $project->employees()->attach($request->funcionarios);
+        });
+
+        return redirect()->route('projects.index')
+            ->with('mensagem', 'Projeto criado com sucesso!');
     }
 
     public function show(Project $project)
@@ -45,12 +55,31 @@ class ProjectController extends Controller
 
     public function edit($id)
     {
-        //
+        $projeto = Project::findOrFail($id);
+        $clientes = Client::get();
+        $funcionarios = Employee::get();
+
+        return view('projects.edit', [
+            'project' => $projeto,
+            'clientes' => $clientes,
+            'funcionarios' => $funcionarios
+        ]);
     }
 
-    public function update(Request $request, $id)
+    public function update(ProjectRequest $request, $id)
     {
-        //
+        $project = Project::findOrFail($id);
+
+        DB::transaction(function () use ($request, $project) {
+            $project->update(
+                $request->except(['_token', 'funcionarios'])
+            );
+
+            $project->employees()->sync($request->funcionarios);
+        });
+
+        return redirect()->route('projects.index')
+            ->with('mensagem', 'Projeto atualizado com sucesso!');
     }
 
     public function destroy($id)
